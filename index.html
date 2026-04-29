@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MovieWatcher - Your Ultimate Movie Search Platform" />
+    <title>MovieWatcher</title>
+    <!-- Google Fonts for modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <!-- App Container -->
+    <div id="app">
+      
+      <!-- Header & Search -->
+      <header class="navbar">
+        <div class="logo">
+          <i data-lucide="film" class="logo-icon"></i>
+          MovieWatcher
+        </div>
+        
+        <div class="nav-controls">
+          <div class="search-container relative">
+            <input type="text" id="search-input" placeholder="Search movies..." autocomplete="off">
+            <button id="search-button" aria-label="Search">
+              <i data-lucide="search"></i>
+            </button>
+            <div id="search-suggestions" class="search-suggestions hidden"></div>
+          </div>
+
+          <button id="btn-theme-toggle" class="icon-btn" aria-label="Toggle Theme">
+            <i data-lucide="moon" id="theme-icon"></i>
+          </button>
+
+          <button id="btn-watchlist" class="nav-btn hidden">
+            <i data-lucide="bookmark"></i> Watchlist
+          </button>
+
+          <div id="auth-section" class="auth-section">
+            <button id="btn-signin-modal" class="nav-btn btn-primary">Sign In</button>
+            <div id="user-profile" class="user-profile hidden">
+              <div class="avatar" id="user-avatar">U</div>
+              <button id="btn-profile-modal" class="icon-btn" aria-label="Profile Settings">
+                <i data-lucide="settings"></i>
+              </button>
+              <button id="btn-logout" class="icon-btn" aria-label="Logout">
+                <i data-lucide="log-out"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <div id="error-message" class="error-message hidden"></div>
+        
+        <!-- Search Results Grid (Hidden by default) -->
+        <div id="search-results-section" class="hidden">
+          <h2 class="section-title">Search Results</h2>
+          <div id="movie-grid" class="movie-grid"></div>
+        </div>
+
+        <!-- Categories Container -->
+        <div id="categories-container" class="categories-container">
+          <!-- Horizontal rows will be injected here -->
+        </div>
+      </main>
+
+      <!-- Movie Details Modal -->
+      <div id="movie-modal" class="modal hidden">
+        <div class="modal-content">
+          <button id="close-modal" class="close-btn" aria-label="Close modal">
+            <i data-lucide="x"></i>
+          </button>
+          
+          <div class="modal-body">
+            <div class="modal-poster">
+              <img id="modal-img" src="" alt="Movie Poster">
+              <button id="favorite-btn" class="favorite-btn">
+                <i data-lucide="heart" class="heart-icon"></i>
+                <span id="favorite-text">Add to Favorites</span>
+              </button>
+            </div>
+            
+            <div class="modal-info">
+              <h2 id="modal-title">Movie Title</h2>
+              <div class="modal-meta">
+                <span id="modal-date" class="meta-item">2023</span>
+                <span id="modal-rating" class="meta-item rating-imdb"><span class="imdb-badge">IMDb</span> <span id="imdb-score">N/A</span></span>
+                <span id="modal-tmdb-rating" class="meta-item rating-tmdb"><span class="tmdb-badge">TMDb</span> <span id="tmdb-score">N/A</span></span>
+              </div>
+              
+              <div class="modal-tags" id="modal-genres">
+                <!-- Genres injected here -->
+              </div>
+
+              <h3>Overview</h3>
+              <p id="modal-overview">Movie overview text...</p>
+              
+              <h3>Top Cast</h3>
+              <div id="modal-cast" class="cast-list">
+                <!-- Cast injected here -->
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-trailer" id="trailer-container">
+            <h3>Trailer</h3>
+            <div class="iframe-wrapper">
+              <iframe id="trailer-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+          
+          <div class="modal-similar" id="similar-container">
+            <h3>Similar Movies</h3>
+            <div id="similar-grid" class="similar-grid">
+              <!-- Similar movies injected here -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal hidden">
+      <div class="modal-content auth-modal-content">
+        <button id="close-auth-modal" class="close-btn" aria-label="Close modal">
+          <i data-lucide="x"></i>
+        </button>
+        <div class="auth-body">
+          <h2 id="auth-title">Sign In</h2>
+          <form id="auth-form" class="auth-form">
+            <div id="name-group" class="input-group hidden">
+              <label for="auth-name">Name</label>
+              <input type="text" id="auth-name" placeholder="John Doe">
+            </div>
+            <div class="input-group">
+              <label for="auth-email">Email</label>
+              <input type="email" id="auth-email" placeholder="you@example.com" required>
+            </div>
+            <div class="input-group">
+              <label for="auth-password">Password</label>
+              <input type="password" id="auth-password" placeholder="••••••••" required>
+            </div>
+            <div id="auth-error" class="auth-error hidden"></div>
+            <button type="submit" class="btn-primary full-width" id="auth-submit">Sign In</button>
+          </form>
+          <div class="auth-footer">
+            <span id="auth-toggle-text">New to MovieWatcher?</span>
+            <button id="btn-toggle-auth" class="text-btn">Sign up now.</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Profile Settings Modal -->
+    <div id="profile-modal" class="modal hidden">
+      <div class="modal-content auth-modal-content" style="max-width: 600px;">
+        <button id="close-profile-modal" class="close-btn" aria-label="Close modal">
+          <i data-lucide="x"></i>
+        </button>
+        <div class="auth-body">
+          <h2>Personalize Your Recommendations</h2>
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 10px;">Tell us what you like, and we will find the best movies for you.</p>
+          <form id="profile-form" class="auth-form">
+            <div class="input-group">
+              <label for="profile-genres">Favorite Genres (comma separated)</label>
+              <input type="text" id="profile-genres" placeholder="e.g. Action, Sci-Fi, Comedy">
+            </div>
+            <div class="input-group">
+              <label for="profile-hobbies">Hobbies (comma separated)</label>
+              <input type="text" id="profile-hobbies" placeholder="e.g. gaming, reading, traveling">
+            </div>
+            <div class="input-group">
+              <label for="profile-interests">Interests (comma separated)</label>
+              <input type="text" id="profile-interests" placeholder="e.g. space, history, crime">
+            </div>
+            <div class="input-group">
+              <label for="profile-moods">Mood Preferences (comma separated)</label>
+              <input type="text" id="profile-moods" placeholder="e.g. dark, feel-good, suspenseful">
+            </div>
+            <div id="profile-success" style="color: #4ade80; text-align: center; font-size: 14px;" class="hidden">Preferences saved successfully!</div>
+            <button type="submit" class="btn-primary full-width" id="profile-submit">Save Preferences</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
