@@ -1,5 +1,5 @@
 # MovieWatcher
-  
+   
 MovieWatcher is a modern movie discovery app built with Vite. It uses the TMDb and OMDb APIs to deliver trending, popular, top-rated, and upcoming movies, plus search, detailed movie views, trailers, similar titles, and a personalized watchlist experience.
 
 ## Overview
