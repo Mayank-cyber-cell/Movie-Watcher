@@ -5,9 +5,7 @@ const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 const OMDB_BASE_URL = 'https://www.omdbapi.com/';
 
-/**
- * Validates API keys presence
- */
+
 export const checkApiKeys = () => {
   if (!TMDB_API_KEY || !OMDB_API_KEY) {
     console.warn("API Keys might be missing in .env");
