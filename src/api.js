@@ -14,9 +14,7 @@ export const checkApiKeys = () => {
   return true;
 }
 
-/**
- * Helper to fetch data from TMDb
- */
+
 async function fetchFromTMDb(endpoint, queryParams = "") {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout
